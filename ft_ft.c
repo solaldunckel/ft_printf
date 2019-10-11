@@ -6,12 +6,11 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 12:27:19 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/10 17:54:22 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/11 09:51:46 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
+#include "ft_printf.h"
 
 size_t		ft_strlen(const char *s)
 {

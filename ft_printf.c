@@ -6,30 +6,11 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 11:10:11 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/10 18:09:10 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/11 10:49:36 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-**
-** c = char
-** s = char *
-** p = pointeur
-** d = int base 10
-** i = int detect base (0 = octal / 0x = hexa)
-** . = + digits = max de byte print pour une string (0 si pas de digits)
-** 0 = zero padding
-** - = left adjustement of output
-**
-*/
-
-#include <stdio.h>
-#include <stdarg.h>
-#include <unistd.h>
-
-void	ft_putchar(char c);
-int		ft_parse(int i, const char *str, va_list ap);
-
+#include "ft_printf.h"
 
 int		ft_printf(const char *str, ...)
 {
@@ -43,9 +24,7 @@ int		ft_printf(const char *str, ...)
 		if (str[i] == '%')
 		{
 			i++;
-			while (str[i] == ' ')
-				i++;
-			if ((i = ft_parse(i, str, ap)) < 0)
+			if ((ft_parse(&i, str, ap)) < 0)
 				return (-1);
 		}
 		else
@@ -67,13 +46,16 @@ int		main(int argc, char	**argv)
 
 	printf("\n**** PRINTF ****\n\n");
 	printf("%%c : %c\n", c);
-	printf("%%s : [%-s]\n", str);
+	printf("%%s : [%s]\n", str);
 	printf("%%p : %p\n", str);
 	printf("%%d : %d\n", nb);
 	printf("%%i : %i\n", nb);
 	printf("%%u : %u\n", nbu);
 	printf("%%x : %x\n", nb);
 	printf("%%X : %X\n", nb);
+
+	printf("taille minimum : [%---25 5 s]\n", str);
+	printf("taille minimum : [%---25d]\n", nb);
 
 	ft_printf("\n**** FT_PRINTF ****\n\n");
 	ft_printf("%%c : %c\n", c);
@@ -84,6 +66,9 @@ int		main(int argc, char	**argv)
 	ft_printf("%%u : %u\n", nbu);
 	ft_printf("%%x : %x\n", nb);
 	ft_printf("%%X : %X\n", nb);
+
+	ft_printf("taille minimum : [%----25 s]\n", str);
+	ft_printf("taille minimum : [%---25d]\n", nb);
 
 	return (0);
 }
