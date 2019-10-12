@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 12:27:19 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/11 09:51:46 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/12 20:02:23 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,21 @@ void	ft_putnbr_u(int n)
 	}
 	if (nb < 10)
 		ft_putchar(nb + 48);
+}
+
+size_t		ft_intlen(int n)
+{
+	size_t		len;
+	long		num;
+
+	num = n;
+	len = 1;
+	if (num < 0)
+		num = -num;
+	while (num >= 10)
+	{
+		num = num / 10;
+		len++;
+	}
+	return (len);
 }
