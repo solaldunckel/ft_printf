@@ -6,20 +6,24 @@
 #    By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/07 12:02:19 by sdunckel          #+#    #+#              #
-#    Updated: 2019/10/11 09:59:10 by sdunckel         ###   ########.fr        #
+#    Updated: 2019/10/15 14:14:51 by sdunckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= ft_printf
 
-SRCS			= \
+SRCS_LIST		= \
 					ft_ft.c \
 					ft_ft2.c \
 					ft_parse.c \
-					ft_printf.c
+					ft_printf.c \
+					main.c
+SRCS			= $(addprefix ${FOLDER}/, ${SRCS_LIST})
+
 OBJS			= ${SRCS:.c=.o}
 
-HEADER			= ft_printf.h
+HEADER			= includes
+FOLDER			= srcs
 
 CC				= gcc
 CFLAGS 			= #-Wall -Wextra -Werror
@@ -28,6 +32,7 @@ RM				= rm -f
 all:			${NAME}
 
 $(NAME):		${OBJS}
+				@${CC} ${CFLAGS} ${SRCS} -I ${HEADER} -o ${NAME}
 
 %.o: %.c
 				@${CC} ${CFLAGS} -c -o $@ $< -I ${HEADER}

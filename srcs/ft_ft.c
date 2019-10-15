@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 12:27:19 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/12 20:02:23 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/15 15:26:10 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,30 @@ void	ft_putchar(char c)
 	write(1, &c, 1);
 }
 
-void	ft_putstr(char *s)
+void	ft_putstr(char *s, int off)
 {
+	int		len;
+	int		min;
+
+	len = ft_strlen(s);
+	min = off + 1;
+	if (off > 0)
+		while (--min > len)
+			ft_putchar(' ');
 	while (*s)
 	{
 		ft_putchar(*s);
 		s++;
 	}
+	if (off < 0)
+	{
+		min = -min + 2;
+		while (--min > len)
+			ft_putchar(' ');
+	}
 }
 
-void	ft_putnbr(int n)
+void	ft_putnbr(int n, int off)
 {
 	long		nb;
 
@@ -48,7 +62,7 @@ void	ft_putnbr(int n)
 	}
 	if (nb >= 10)
 	{
-		ft_putnbr(nb / 10);
+		ft_putnbr(nb / 10, off);
 		ft_putchar(nb % 10 + 48);
 	}
 	if (nb < 10)
@@ -67,7 +81,7 @@ void	ft_putnbr_u(int n)
 	}
 	if (nb >= 10)
 	{
-		ft_putnbr(nb / 10);
+		ft_putnbr_u(nb / 10);
 		ft_putchar(nb % 10 + 48);
 	}
 	if (nb < 10)

@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 09:51:05 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/12 20:16:36 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/15 15:31:56 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_put_hex(long unsigned int num, char *base)
 
 void	ft_put_add(va_list ap)
 {
-	ft_putstr("0x");
+	ft_putstr("0x", 0);
 	ft_put_hex(va_arg(ap, long unsigned), "0123456789abcdef");
 }
 
@@ -34,13 +34,6 @@ size_t	ft_is_flag(char c)
 size_t	ft_is_option(char c)
 {
 	return (c == '-' || c == '.' || c == '0' || c == '*');
-}
-
-int		ft_check_flag(const char *str, int i)
-{
-	while (str[i] == ' ')
-		i++;
-	return (i);
 }
 
 size_t	is_space(char c)
@@ -59,5 +52,6 @@ int		ft_atoi(const char *str, int *i)
 		atoi = atoi * 10 + str[*i] - 48;
 		(*i)++;
 	}
+	(*i)--;
 	return (atoi);
 }
