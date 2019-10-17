@@ -6,13 +6,13 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 12:27:19 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/15 15:26:10 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/17 17:39:11 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t		ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
@@ -27,30 +27,12 @@ void	ft_putchar(char c)
 	write(1, &c, 1);
 }
 
-void	ft_putstr(char *s, int off)
+void	ft_putstr(const char *s)
 {
-	int		len;
-	int		min;
-
-	len = ft_strlen(s);
-	min = off + 1;
-	if (off > 0)
-		while (--min > len)
-			ft_putchar(' ');
-	while (*s)
-	{
-		ft_putchar(*s);
-		s++;
-	}
-	if (off < 0)
-	{
-		min = -min + 2;
-		while (--min > len)
-			ft_putchar(' ');
-	}
+	write(1, s, ft_strlen(s));
 }
 
-void	ft_putnbr(int n, int off)
+void	ft_putnbr(int n)
 {
 	long		nb;
 
@@ -62,33 +44,25 @@ void	ft_putnbr(int n, int off)
 	}
 	if (nb >= 10)
 	{
-		ft_putnbr(nb / 10, off);
+		ft_putnbr(nb / 10);
 		ft_putchar(nb % 10 + 48);
 	}
 	if (nb < 10)
 		ft_putchar(nb + 48);
 }
 
-void	ft_putnbr_u(int n)
+void	ft_putnbr_u(unsigned int n)
 {
-	unsigned int	nb;
-
-	nb = n;
-	if (nb < 0)
+	if (n >= 10)
 	{
-		ft_putchar('-');
-		nb = -nb;
+		ft_putnbr_u(n / 10);
+		ft_putchar(n % 10 + 48);
 	}
-	if (nb >= 10)
-	{
-		ft_putnbr_u(nb / 10);
-		ft_putchar(nb % 10 + 48);
-	}
-	if (nb < 10)
-		ft_putchar(nb + 48);
+	if (n < 10)
+		ft_putchar(n + 48);
 }
 
-size_t		ft_intlen(int n)
+size_t	ft_intlen(int n)
 {
 	size_t		len;
 	long		num;
@@ -100,6 +74,19 @@ size_t		ft_intlen(int n)
 	while (num >= 10)
 	{
 		num = num / 10;
+		len++;
+	}
+	return (len);
+}
+
+size_t	ft_hexlen(long unsigned n)
+{
+	size_t		len;
+
+	len = 1;
+	while (n >= 16)
+	{
+		n = n / 16;
 		len++;
 	}
 	return (len);

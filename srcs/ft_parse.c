@@ -6,49 +6,53 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:00:09 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/15 15:38:29 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/17 18:09:42 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_check_flag(const char *str, va_list ap, int i, int *off, int *sign)
+int		ft_check_flag(const char *str, va_list ap, t_printf *tab)
 {
-	while (!ft_is_flag(str[i]))
+	while (!ft_is_flag(str[tab->i]))
 	{
-		if (str[i] == '*')
-			*off = va_arg(ap, int);
-		if (str[i] == '.')
-			*sign = '.';
-		if (str[i] == '0')
-			*sign = '0';
-		if (str[i] >= '0' && str[i] <= '9')
-			*off = ft_atoi(str, &i);
-		if (str[i] == '-')
-			*sign = '-';
-		i++;
+		if (str[tab->i] == '*')
+			tab->width = va_arg(ap, int);
+		if (str[tab->i] == '.')
+			tab->minus = 1;
+		if (str[tab->i] == '0')
+			tab->zero = 1;
+		if (str[tab->i] >= '0' && str[tab->i] <= '9')
+			tab->width = ft_atoi(str, &tab->i);
+		if (str[tab->i] == '-')
+			tab->flag = '-';
+		tab->i++;
 	}
-	return (i);
+	return (tab->i);
 }
 
-int		ft_parse(int i, const char *str, va_list ap, int *count)
+void	ft_reset_flags(t_printf *tab)
 {
-	int		off;
-	int		tr;
-	int		sign;
+	tab->width = 0;
+	tab->flag = 0;
+	tab->precision = 0;
+	tab->zero = 0;
+	tab->minus = 0;
+}
 
-	off = 0;
-	sign = 0;
-	i++;
-	i = ft_check_flag(str, ap, i, &off, &sign);
-	sign == '-' ? off = -off : 0;
-	str[i] == 'c' ? ft_putchar(va_arg(ap, int)) : 0;
-	str[i] == 's' ? ft_putstr(va_arg(ap, char *), off) : 0;
-	str[i] == 'p' ? ft_put_add(ap) : 0;
-	str[i] == 'd' || str[i] == 'i' ? ft_putnbr(va_arg(ap, int), off) : 0;
-	str[i] == 'u' ? ft_putnbr_u(va_arg(ap, unsigned int)) : 0;
-	str[i] == 'x' ? ft_put_hex(va_arg(ap, unsigned int), "0123456789abcdef") : 0;
-	str[i] == 'X' ? ft_put_hex(va_arg(ap, unsigned int), "0123456789ABCDEF") : 0;
-	str[i] == '%' ? ft_putchar('%') : 0;
-	return (i);
+int		ft_parse(const char *str, va_list ap, t_printf *tab)
+{
+	ft_reset_flags(tab);
+	ft_check_flag(str, ap, tab);
+	tab->flag == '-' ? tab->width = -tab->width : 0;
+	str[tab->i] == 'c' ? ft_putchar(va_arg(ap, int)) : 0;
+	str[tab->i] == 's' ? ft_print_str(va_arg(ap, char *), tab) : 0;
+	str[tab->i] == 'p' ? ft_print_add(va_arg(ap, long unsigned), tab) : 0;
+	str[tab->i] == 'd' || str[tab->i] == 'i' ?
+		ft_print_nbr(va_arg(ap, int), tab) : 0;
+	str[tab->i] == 'u' ? ft_putnbr_u(va_arg(ap, unsigned int)) : 0;
+	str[tab->i] == 'x' ? ft_print_hex(va_arg(ap, unsigned int), 0, tab) : 0;
+	str[tab->i] == 'X' ? ft_print_hex(va_arg(ap, unsigned int), 1, tab) : 0;
+	str[tab->i] == '%' ? ft_print_percent('%', tab) : 0;
+	return (tab->i);
 }

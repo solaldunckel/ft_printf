@@ -6,34 +6,29 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 09:51:05 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/15 15:31:56 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/17 17:40:37 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_put_hex(long unsigned int num, char *base)
+void	ft_put_hex(long unsigned num, char *base)
 {
 	if (num >= 16)
 		ft_put_hex(num / 16, base);
 	ft_putchar(base[num % 16]);
 }
 
-void	ft_put_add(va_list ap)
+void	ft_put_add(long unsigned add)
 {
-	ft_putstr("0x", 0);
-	ft_put_hex(va_arg(ap, long unsigned), "0123456789abcdef");
+	ft_putstr("0x");
+	ft_put_hex(add, "0123456789abcdef");
 }
 
 size_t	ft_is_flag(char c)
 {
 	return (c == 'c' || c == 's' || c == 'p' || c == 'd' || c == 'i'
 	|| c == 'u' || c == 'x' || c == 'X' || c == '%');
-}
-
-size_t	ft_is_option(char c)
-{
-	return (c == '-' || c == '.' || c == '0' || c == '*');
 }
 
 size_t	is_space(char c)

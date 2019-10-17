@@ -6,28 +6,44 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 11:10:11 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/15 14:17:18 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/17 18:09:45 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+void	ft_str_it(va_list ap, t_printf *tab, const char *str)
+{
+	while (str[tab->i])
+	{
+		if (str[tab->i] == '%')
+		{
+			tab->i++;
+			ft_parse(str, ap, tab);
+		}
+		else
+		{
+			tab->count += 1;
+			ft_putchar(str[tab->i]);
+		}
+		tab->i++;
+	}
+}
+
 int		ft_printf(const char *str, ...)
 {
+	t_printf	*tab;
 	va_list		ap;
-	int			i;
 	int			count;
 
-	i = 0;
+	if (!(tab = malloc(sizeof(t_printf))))
+		return (0);
+	tab->count = 0;
+	tab->i = 0;
 	va_start(ap, str);
-	while (str[i])
-	{
-		if (str[i] == '%')
-			i = ft_parse(i, str, ap, &count);
-		else
-			ft_putchar(str[i]);
-		i++;
-	}
+	ft_str_it(ap, tab, str);
 	va_end(ap);
-	return (i);
+	count = tab->count;
+	free(tab);
+	return (count);
 }
