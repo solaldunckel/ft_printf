@@ -6,31 +6,11 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 12:27:19 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/18 16:28:03 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/18 22:12:25 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-void	ft_putstr(const char *s)
-{
-	write(1, s, ft_strlen(s));
-}
 
 void	ft_putstr_p(const char *s, t_printf *tab)
 {
@@ -39,7 +19,7 @@ void	ft_putstr_p(const char *s, t_printf *tab)
 	if (tab->precision)
 		write(1, s, tab->precision_width);
 	else
-		write(1, s, ft_strlen(s));
+		ft_putstr(s);
 }
 
 void	ft_putnbr(int n)
@@ -67,34 +47,4 @@ void	ft_putnbr_u(unsigned int n)
 	}
 	if (n < 10)
 		ft_putchar(n + 48);
-}
-
-size_t	ft_intlen(int n)
-{
-	size_t		len;
-	long		num;
-
-	num = n;
-	len = 1;
-	if (num < 0)
-		num = -num;
-	while (num >= 10)
-	{
-		num = num / 10;
-		len++;
-	}
-	return (len);
-}
-
-size_t	ft_hexlen(long unsigned n)
-{
-	size_t		len;
-
-	len = 1;
-	while (n >= 16)
-	{
-		n = n / 16;
-		len++;
-	}
-	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 09:51:05 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/18 11:47:19 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/18 22:26:09 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,20 @@
 
 void	ft_put_hex(long unsigned num, char *base)
 {
-	if (num >= 16)
-		ft_put_hex(num / 16, base);
-	ft_putchar(base[num % 16]);
-}
+	char	*str;
+	int		num_len;
 
-void	ft_put_add(long unsigned add)
-{
-	ft_putstr("0x");
-	ft_put_hex(add, "0123456789abcdef");
+	num_len = ft_hexlen(num);
+	if (!(str = (char*)malloc(sizeof(char) * num_len + 1)))
+		return ;
+	str[num_len] = '\0';
+	while (num_len)
+	{
+		str[--num_len] = base[num % 16];
+		num = num / 16;
+	}
+	ft_putstr(str);
+	free(str);
 }
 
 size_t	ft_is_flag(char c)

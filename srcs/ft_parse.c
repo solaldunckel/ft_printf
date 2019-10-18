@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:00:09 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/18 11:49:39 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/18 23:23:32 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,34 +17,50 @@ int		ft_check_flag(const char *str, va_list ap, t_printf *tab)
 	while (!ft_is_flag(str[tab->i]))
 	{
 		if (str[tab->i] == '*')
-			tab->width = va_arg(ap, int);
+		{
+			if (tab->precision_width)
+				tab->width = va_arg(ap, int);
+			else
+				tab->precision_width = va_arg(ap, int);
+		}
 		if (str[tab->i] == '0' && !tab->minus)
 			tab->zero = 1;
 		if (str[tab->i] >= '0' && str[tab->i] <= '9')
-			tab->precision ? tab->precision_width = ft_atoi(str, &tab->i) :
-				(tab->width = ft_atoi(str, &tab->i));
+		{
+			if (tab->precision_parsing)
+				tab->precision_width = ft_atoi(str, &tab->i);
+			else
+				tab->width = ft_atoi(str, &tab->i);
+		}
+		tab->precision_parsing = 0;
 		if (str[tab->i] == '-')
 		{
 			tab->zero = 0;
 			tab->minus = 1;
 		}
 		if (str[tab->i] == '.')
-		{
-			tab->zero = 0;
-			tab->precision = 1;
-		}
+			ft_set_precision(tab);
 		tab->i++;
 	}
 	return (tab->i);
 }
 
+void	ft_set_precision(t_printf *tab)
+{
+	tab->zero = 0;
+	tab->precision = 1;
+	tab->precision_parsing = 1;
+	tab->precision_width = 0;
+}
+
 void	ft_reset_flags(t_printf *tab)
 {
 	tab->width = 0;
-	tab->precision_width = 0;
 	tab->precision = 0;
-	tab->zero = 0;
+	tab->precision_width = 0;
+	tab->precision_parsing = 0;
 	tab->minus = 0;
+	tab->zero = 0;
 }
 
 int		ft_parse(const char *str, va_list ap, t_printf *tab)
