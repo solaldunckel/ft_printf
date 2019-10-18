@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 12:27:19 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/17 17:39:11 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/18 16:28:03 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,23 @@ void	ft_putstr(const char *s)
 	write(1, s, ft_strlen(s));
 }
 
+void	ft_putstr_p(const char *s, t_printf *tab)
+{
+	if (tab->precision_width > ft_strlen(s))
+		tab->precision_width = ft_strlen(s);
+	if (tab->precision)
+		write(1, s, tab->precision_width);
+	else
+		write(1, s, ft_strlen(s));
+}
+
 void	ft_putnbr(int n)
 {
 	long		nb;
 
 	nb = n;
 	if (nb < 0)
-	{
-		ft_putchar('-');
 		nb = -nb;
-	}
 	if (nb >= 10)
 	{
 		ft_putnbr(nb / 10);

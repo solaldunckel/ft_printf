@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 09:29:00 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/17 17:43:14 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/18 11:49:34 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,18 @@
 typedef struct	s_printf
 {
 	int width;
-	int count;
-	int flag;
-	int minus;
 	int	precision;
+	int	precision_width;
+	int minus;
 	int zero;
+	int count;
 	int i;
 }				t_printf;
 
 int				ft_printf(const char *str, ...);
 int				ft_parse(const char *str, va_list ap, t_printf *tab);
 int				ft_check_flag(const char *str, va_list ap, t_printf *tab);
+void			ft_str_it(va_list ap, t_printf *tab, const char *str);
 
 /*
 ** printer
@@ -46,6 +47,8 @@ void			ft_putnbr_u(unsigned int n);
 void			ft_put_hex(long unsigned num, char *base);
 void			ft_put_add(long unsigned add);
 
+void			ft_putstr_p(const char *s, t_printf *tab);
+
 void			ft_print_str(const char *s, t_printf *tab);
 void			ft_print_nbr(int n, t_printf *tab);
 void			ft_print_percent(char c, t_printf *tab);
@@ -53,8 +56,6 @@ void			ft_print_add(long unsigned add, t_printf *tab);
 void			ft_print_hex(unsigned int hex, int base, t_printf *tab);
 
 int				ft_atoi(const char *str, int *i);
-
-void			ft_str_it(va_list ap, t_printf *tab, const char *str);
 
 /*
 ** size

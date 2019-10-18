@@ -6,7 +6,7 @@
 #    By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/07 12:02:19 by sdunckel          #+#    #+#              #
-#    Updated: 2019/10/17 14:01:05 by sdunckel         ###   ########.fr        #
+#    Updated: 2019/10/18 11:56:13 by sdunckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,7 @@ SRCS_LIST		= \
 					ft_ft2.c \
 					ft_parse.c \
 					ft_printf.c \
-					ft_printer.c \
-					main.c
+					ft_printer.c
 SRCS			= $(addprefix ${FOLDER}/, ${SRCS_LIST})
 
 OBJS			= ${SRCS:.c=.o}
@@ -33,7 +32,7 @@ RM				= rm -f
 all:			${NAME}
 
 $(NAME):		${OBJS}
-				@${CC} ${CFLAGS} ${SRCS} -I ${HEADER} -o ${NAME}
+				@${CC} ${CFLAGS} ${SRCS} main.c -I ${HEADER} -o ${NAME}
 
 %.o: %.c
 				@${CC} ${CFLAGS} -c -o $@ $< -I ${HEADER}

@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:00:09 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/17 18:09:42 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/18 11:49:39 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,21 @@ int		ft_check_flag(const char *str, va_list ap, t_printf *tab)
 	{
 		if (str[tab->i] == '*')
 			tab->width = va_arg(ap, int);
-		if (str[tab->i] == '.')
-			tab->minus = 1;
-		if (str[tab->i] == '0')
+		if (str[tab->i] == '0' && !tab->minus)
 			tab->zero = 1;
 		if (str[tab->i] >= '0' && str[tab->i] <= '9')
-			tab->width = ft_atoi(str, &tab->i);
+			tab->precision ? tab->precision_width = ft_atoi(str, &tab->i) :
+				(tab->width = ft_atoi(str, &tab->i));
 		if (str[tab->i] == '-')
-			tab->flag = '-';
+		{
+			tab->zero = 0;
+			tab->minus = 1;
+		}
+		if (str[tab->i] == '.')
+		{
+			tab->zero = 0;
+			tab->precision = 1;
+		}
 		tab->i++;
 	}
 	return (tab->i);
@@ -34,7 +41,7 @@ int		ft_check_flag(const char *str, va_list ap, t_printf *tab)
 void	ft_reset_flags(t_printf *tab)
 {
 	tab->width = 0;
-	tab->flag = 0;
+	tab->precision_width = 0;
 	tab->precision = 0;
 	tab->zero = 0;
 	tab->minus = 0;
@@ -44,7 +51,6 @@ int		ft_parse(const char *str, va_list ap, t_printf *tab)
 {
 	ft_reset_flags(tab);
 	ft_check_flag(str, ap, tab);
-	tab->flag == '-' ? tab->width = -tab->width : 0;
 	str[tab->i] == 'c' ? ft_putchar(va_arg(ap, int)) : 0;
 	str[tab->i] == 's' ? ft_print_str(va_arg(ap, char *), tab) : 0;
 	str[tab->i] == 'p' ? ft_print_add(va_arg(ap, long unsigned), tab) : 0;

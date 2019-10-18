@@ -6,36 +6,81 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:00:16 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/17 18:09:36 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/18 16:39:41 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void	ft_update_count(t_printf *tab, int len)
+{
+	if (tab->width >= len)
+		tab->count += tab->width;
+	else
+		tab->count += len;
+}
+
+void	ft_print_spaces(t_printf *tab, int res)
+{
+	char	*str;
+	int		i;
+
+	i = 0;
+	if (!(str = malloc(sizeof(char) * res + 1)))
+		return ;
+	while (i < res)
+	{
+		if (tab->zero)
+			str[i] = '0';
+		else
+			str[i] = ' ';
+		i++;
+	}
+	str[i] = '\0';
+	ft_putstr(str);
+	free(str);
+}
 
 void	ft_print_str(const char *s, t_printf *tab)
 {
 	int		len;
 
 	len = ft_strlen(s);
-	if (ABS(tab->width) >= len)
-		tab->count += len + ABS(tab->width);
-	else
-		tab->count += len;
-	ft_putstr(s);
+	if (tab->width >= len && !tab->minus)
+		ft_print_spaces(tab, tab->width - len);
+	ft_putstr_p(s, tab);
+	if (tab->width >= len && tab->minus)
+		ft_print_spaces(tab, tab->width - len);
+	ft_update_count(tab, len);
 }
 
 void	ft_print_nbr(int n, t_printf *tab)
 {
 	int		len;
+	int		prec;
+	int		off;
 
+	prec = 0;
+	off = 0;
 	len = ft_intlen(n);
-	if (ABS(tab->width) >= len)
-		tab->count += ABS(tab->width);
-	else
-		tab->count += len;
-	if (n < 0)
-		len++;
+	if (tab->precision)
+	{
+		off = ft_intlen(n);
+		prec = tab->precision_width - len;
+	}
+	n < 0 ? len++ : 0;
+	if (tab->width >= len && !tab->minus)
+		ft_print_spaces(tab, tab->width - len - tab->precision_width + off);
+	n < 0 ? ft_putchar('-') : 0;
+	if (tab->precision)
+		tab->zero = 1;
+	if (prec)
+		ft_print_spaces(tab, prec);
+	tab->zero = 0;
 	ft_putnbr(n);
+	if (tab->width >= len && tab->minus)
+		ft_print_spaces(tab, tab->width - len - tab->precision_width + off);
+	ft_update_count(tab, len);
 }
 
 void	ft_print_percent(char c, t_printf *tab)
@@ -43,11 +88,12 @@ void	ft_print_percent(char c, t_printf *tab)
 	int		len;
 
 	len = 1;
-	if (ABS(tab->width) >= len)
-		tab->count += ABS(tab->width);
-	else
-		tab->count += len;
+	if (tab->width >= len && !tab->minus)
+		ft_print_spaces(tab, tab->width - len);
 	ft_putchar(c);
+	if (tab->width >= len && tab->minus)
+		ft_print_spaces(tab, tab->width - len);
+	ft_update_count(tab, len);
 }
 
 void	ft_print_add(long unsigned add, t_printf *tab)
@@ -55,10 +101,7 @@ void	ft_print_add(long unsigned add, t_printf *tab)
 	int		len;
 
 	len = ft_hexlen(add) + 2;
-	if (ABS(tab->width) >= len)
-		tab->count += ABS(tab->width);
-	else
-		tab->count += len;
+	ft_update_count(tab, len);
 	ft_put_add(add);
 }
 
@@ -67,12 +110,13 @@ void	ft_print_hex(unsigned int hex, int base, t_printf *tab)
 	int		len;
 
 	len = ft_hexlen((long unsigned)hex);
-	if (ABS(tab->width) >= len)
-		tab->count += ABS(tab->width);
-	else
-		tab->count += len;
+	if (tab->width >= len && !tab->minus)
+		ft_print_spaces(tab, tab->width - len);
 	if (base)
 		ft_put_hex(hex, "0123456789ABCDEF");
 	else
 		ft_put_hex(hex, "0123456789abcdef");
+	if (tab->width >= len && tab->minus)
+		ft_print_spaces(tab, tab->width - len);
+	ft_update_count(tab, len);
 }
