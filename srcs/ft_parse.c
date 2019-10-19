@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:00:09 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/19 01:37:15 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/19 02:27:07 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int		ft_parse(const char *str, va_list ap, t_printf *tab)
 	str[tab->i] == 'p' ? ft_print_add(va_arg(ap, long unsigned), tab) : 0;
 	str[tab->i] == 'd' || str[tab->i] == 'i' ?
 		ft_print_nbr(va_arg(ap, int), tab) : 0;
-	str[tab->i] == 'u' ? ft_putnbr_u(va_arg(ap, unsigned int)) : 0;
+	str[tab->i] == 'u' ? ft_print_nbr((int)va_arg(ap, unsigned int), tab) : 0;
 	str[tab->i] == 'x' ? ft_print_hex(va_arg(ap, unsigned int), 0, tab) : 0;
 	str[tab->i] == 'X' ? ft_print_hex(va_arg(ap, unsigned int), 1, tab) : 0;
 	str[tab->i] == '%' ? ft_print_percent('%', tab) : 0;

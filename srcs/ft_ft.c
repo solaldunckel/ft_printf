@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 12:27:19 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/18 22:12:25 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/19 10:48:22 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,27 @@ void	ft_putstr_p(const char *s, t_printf *tab)
 
 void	ft_putnbr(int n)
 {
-	long		nb;
+	char	*str;
+	int		num_len;
 
-	nb = n;
-	if (nb < 0)
-		nb = -nb;
-	if (nb >= 10)
+	num_len = ft_intlen(n);
+	if (n == -2147483648)
 	{
-		ft_putnbr(nb / 10);
-		ft_putchar(nb % 10 + 48);
+		ft_putstr("2147483648");
+		return ;
 	}
-	if (nb < 10)
-		ft_putchar(nb + 48);
+	if (n < 0)
+		n = -n;
+	if (!(str = malloc(sizeof(char) * num_len + 1)))
+		return ;
+	str[num_len] = '\0';
+	while (num_len)
+	{
+		str[--num_len] = n % 10 + 48;
+		n = n / 10;
+	}
+	ft_putstr(str);
+	free(str);
 }
 
 void	ft_putnbr_u(unsigned int n)

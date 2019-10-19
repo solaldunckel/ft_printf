@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 09:29:00 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/19 01:35:49 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/19 10:39:31 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,15 @@ void			ft_print_nbr(int n, t_printf *tab);
 void			ft_print_percent(char c, t_printf *tab);
 void			ft_print_add(long unsigned add, t_printf *tab);
 void			ft_print_hex(unsigned int hex, int base, t_printf *tab);
-
+void			ft_print_spaces(t_printf *tab, int res);
 /*
 ** other
 */
-
+void			ft_update_count(t_printf *tab, int len);
 size_t			ft_hexlen(long unsigned n);
 void			ft_set_precision(t_printf *tab);
 void			ft_reset_flags(t_printf *tab);
 size_t			ft_is_flag(char c);
+size_t			ft_is_from_pf(char c);
 
 #endif
