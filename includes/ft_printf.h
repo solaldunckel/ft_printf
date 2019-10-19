@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 09:29:00 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/19 10:39:31 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/19 12:24:49 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void			ft_put_hex(long unsigned num, char *base);
 void			ft_putstr_p(const char *s, t_printf *tab);
 void			ft_print_str(const char *s, t_printf *tab);
 void			ft_print_nbr(int n, t_printf *tab);
+void			ft_print_nbr_u(unsigned int n, t_printf *tab);
 void			ft_print_percent(char c, t_printf *tab);
 void			ft_print_add(long unsigned add, t_printf *tab);
 void			ft_print_hex(unsigned int hex, int base, t_printf *tab);
