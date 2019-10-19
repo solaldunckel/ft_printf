@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 14:14:34 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/19 01:50:55 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/19 02:05:16 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int		main(void)
 	ft_printf("**************************\033[0m\n\n");
 	test("helloworld\n", NULL, NULL);
 	test("mdr tout marche sauf%32) lalala\n", NULL, NULL);
+	test("mdr tout marche sauf%-32.) lalala\n", NULL, NULL);
 
 	ft_printf("Appuyer sur une touche pour continuer.");
 	getchar();

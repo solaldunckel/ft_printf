@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:00:16 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/19 02:03:18 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/19 02:15:24 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,29 +109,28 @@ void	ft_print_percent(char c, t_printf *tab)
 void	ft_print_add(long unsigned add, t_printf *tab)
 {
 	int		len;
+	int		off;
 	int		sp;
 
+	off = 0;
 	sp = tab->width;
 	len = ft_hexlen(add) + 2;
 	if (tab->width >= len && !tab->minus && !tab->zero)
 		ft_print_spaces(tab, tab->width - len);
 	ft_putstr("0x");
-	if (tab->precision)
-	{
-		sp = tab->precision_width + 2;
-		tab->zero = 1;
-	}
-	if (tab->zero && sp >= len)
-	{
-		ft_print_spaces(tab, sp - len);
-		tab->width -= sp - len;
-	}
+	(tab->precision) ? sp = tab->precision_width + 2 : 0;
+	(tab->precision) ? tab->zero = 1 : 0;
+	(tab->zero && sp >= len) ? ft_print_spaces(tab, sp - len) : 0;
+	(tab->zero && sp >= len) ? tab->width -= sp - len : 0;
+	(tab->zero && sp >= len) ? off = sp - len : 0;
 	tab->zero = 0;
 	ft_put_hex(add, "0123456789abcdef");
 	if (tab->width >= len && tab->minus)
 		ft_print_spaces(tab, tab->width - len);
 	if (tab->precision_width > tab->width)
 		tab->width = tab->precision_width + 2;
+	else
+		tab->width += off;
 	ft_update_count(tab, len);
 }
 
