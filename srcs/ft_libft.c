@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 21:36:00 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/18 21:36:21 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/19 19:07:40 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,6 @@ size_t	ft_intlen(int n)
 	while (num >= 10)
 	{
 		num = num / 10;
-		len++;
-	}
-	return (len);
-}
-
-size_t	ft_hexlen(long unsigned n)
-{
-	size_t		len;
-
-	len = 1;
-	while (n >= 16)
-	{
-		n = n / 16;
 		len++;
 	}
 	return (len);

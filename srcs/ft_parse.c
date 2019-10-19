@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:00:09 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/19 12:25:13 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/19 18:27:01 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,6 @@ void	ft_check_flag(const char *str, va_list ap, t_printf *tab)
 		ft_set_precision(tab);
 }
 
-void	ft_set_precision(t_printf *tab)
-{
-	tab->zero = 0;
-	tab->precision = 1;
-	tab->precision_parsing = 1;
-	tab->precision_width = 0;
-}
-
-void	ft_reset_flags(t_printf *tab)
-{
-	tab->width = 0;
-	tab->precision = 0;
-	tab->precision_width = 0;
-	tab->precision_parsing = 0;
-	tab->minus = 0;
-	tab->zero = 0;
-}
-
 int		ft_parse(const char *str, va_list ap, t_printf *tab)
 {
 	ft_reset_flags(tab);
@@ -71,7 +53,7 @@ int		ft_parse(const char *str, va_list ap, t_printf *tab)
 			!tab->minus ? ft_putchar(str[tab->i + 1]) : 0;
 			tab->i++;
 			ft_update_count(tab, tab->width);
-			break;
+			break ;
 		}
 		tab->i++;
 	}

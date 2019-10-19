@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 14:14:34 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/19 11:48:17 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/19 19:04:17 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void 	test(char *test, char *str, int nb)
 int		main(void)
 {
 	char 	str[] = "slt ma biche";
-
+	int		nb = 0;
 	printf("\033[2J\n");
 	ft_printf("\n\033[0;33m**************************\n");
 	ft_printf("********  RANDOM  ********\n");
@@ -81,7 +81,11 @@ int		main(void)
 	ft_printf("**********************\033[0m\n\n");
 	test("=> %%d : [%d]\n", NULL, 42);
 	test("=> %%d : [%.015d]\n", NULL, 42);
-	test("=> %%d : [%.015-027d]\n", NULL, 42);
+	test("=> %%d : [%.015d]\n", NULL, 42);
+	test("=> %%d : [%.1d]\n", NULL, 420);
+	test("=> %%d : [%.12d]\n", NULL, -420);
+	test("=> %%d : [%.015-027d]\n", NULL, 420);
+	test("=> %%d : [%.015-027d]\n", NULL, -420);
 	test("=> %%d : [%20d]\n", NULL, INT_MAX);
 	test("=> %%d : [%20d]\n", NULL, INT_MIN);
 
@@ -95,7 +99,7 @@ int		main(void)
 	test("=> %%u : [%u]\n", NULL, 498302);
 	test("=> %%u : [%.015u]\n", NULL, 498302);
 	test("=> %%u : [%.015-027u]\n", NULL, 498302);
-	test("=> %%u : [%20u]\n", NULL, UINT_MAX);
+	test("=> %%u : [%20u]\n", NULL, 4294967294);
 	test("=> %%u : [%20u]\n", NULL, INT_MIN);
 
 	ft_printf("Appuyer sur une touche pour continuer.");
@@ -113,6 +117,7 @@ int		main(void)
 	test("=> %%x : [%.20-40x]\n", str, NULL);
 	test("=> %%X : [%12.02X]\n", str, NULL);
 	test("=> %%X : [%.2-12X]\n", str, NULL);
+	test("=> %%X : [%.2X]\n", str, NULL);
 
 	ft_printf("Appuyer sur une touche pour continuer.");
 	getchar();
@@ -129,6 +134,7 @@ int		main(void)
 	test("=> %%p : [%40.2p]\n", str, NULL);
 	test("=> %%p : [%.20-40p]\n", str, NULL);
 	test("=> %%p : [%.40-20p]\n", str, NULL);
+	test("=> %%p : [%.0p]\n", NULL, nb);
 
 	ft_printf("Appuyer sur une touche pour continuer.");
 	getchar();

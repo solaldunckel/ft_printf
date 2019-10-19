@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 11:10:11 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/19 11:38:20 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/19 17:17:16 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_putstr_l(const char *s, int len)
 	write(1, s, len);
 }
 
-void 	ft_str_it(va_list ap, t_printf *tab, const char *str)
+void	ft_str_it(va_list ap, t_printf *tab, const char *str)
 {
 	char	*s;
 	int		j;

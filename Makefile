@@ -6,7 +6,7 @@
 #    By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/07 12:02:19 by sdunckel          #+#    #+#              #
-#    Updated: 2019/10/19 01:51:50 by sdunckel         ###   ########.fr        #
+#    Updated: 2019/10/19 18:26:02 by sdunckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,8 @@ SRCS_LIST		= \
 					ft_parse.c \
 					ft_printf.c \
 					ft_libft.c \
+					ft_ft3.c \
+					ft_printer2.c \
 					ft_printer.c
 SRCS			= $(addprefix ${FOLDER}/, ${SRCS_LIST})
 
