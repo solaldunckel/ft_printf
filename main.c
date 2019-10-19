@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 14:14:34 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/19 01:09:52 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/19 01:50:55 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,16 @@ int		main(void)
 	char 	str[] = "slt ma biche";
 
 	printf("\033[2J\n");
+	ft_printf("\n\033[0;33m**************************\n");
+	ft_printf("********  RANDOM  ********\n");
+	ft_printf("**************************\033[0m\n\n");
+	test("helloworld\n", NULL, NULL);
+	test("mdr tout marche sauf%32) lalala\n", NULL, NULL);
+
+	ft_printf("Appuyer sur une touche pour continuer.");
+	getchar();
+
+	printf("\033[2J\n");
 	ft_printf("\n\033[0;33m**********************\n");
 	ft_printf("********  %%s  ********\n");
 	ft_printf("**********************\033[0m\n\n");
@@ -60,7 +70,6 @@ int		main(void)
 	test("=> %%s : [%.15 -27s]\n", str, NULL);
 	test("=> %%s : [%.2 -27s]\n", str, NULL);
 	test("=> %%s : [%20s]\n", str, NULL);
-	//test("=> %%s : [%*s]\n", str, 5);
 
 	ft_printf("Appuyer sur une touche pour continuer.");
 	getchar();
@@ -88,7 +97,7 @@ int		main(void)
 	test("=> %%p : [%10p]\n", str, NULL);
 	test("=> %%p : [%40.2p]\n", str, NULL);
 	test("=> %%p : [%.20-40p]\n", str, NULL);
-	test("=> %%p : [%.42-0000042p]\n", str, NULL);
+	test("=> %%p : [%.40-20p]\n", str, NULL);
 
 	ft_printf("Appuyer sur une touche pour continuer.");
 	getchar();
@@ -101,7 +110,6 @@ int		main(void)
 	test("=> %% : {%40%}\n", NULL, NULL);
 	test("=> %% : {%.0. 040%}\n", NULL, NULL);
 	test("=> %% : {%%%s%%}\n", str, NULL);
-
 
 	return (0);
 }

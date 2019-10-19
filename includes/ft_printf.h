@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 09:29:00 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/18 22:22:06 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/19 01:35:49 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct	s_printf
 
 int				ft_printf(const char *str, ...);
 int				ft_parse(const char *str, va_list ap, t_printf *tab);
-int				ft_check_flag(const char *str, va_list ap, t_printf *tab);
+void			ft_check_flag(const char *str, va_list ap, t_printf *tab);
 void			ft_str_it(va_list ap, t_printf *tab, const char *str);
 
 /*

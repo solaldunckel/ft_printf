@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 09:51:05 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/18 22:26:09 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/19 01:37:20 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ size_t	ft_is_flag(char c)
 {
 	return (c == 'c' || c == 's' || c == 'p' || c == 'd' || c == 'i'
 	|| c == 'u' || c == 'x' || c == 'X' || c == '%');
+}
+
+size_t	ft_is_from_pf(char c)
+{
+	return (ft_is_flag(c) || (c >= '0' && c <= '9')
+	|| c == '-' || c == ' ' || c == '.' || c == '*');
 }
 
 size_t	is_space(char c)
