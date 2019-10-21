@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 21:36:00 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/19 19:07:40 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/21 02:30:05 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,16 @@ int		ft_strlen(const char *s)
 	int	i;
 
 	i = 0;
+	if (!s)
+		return (0);
 	while (s[i])
 		i++;
 	return (i);
 }
 
-void	ft_putchar(char c)
+void	ft_putstr_len(const char *s, int count)
 {
-	write(1, &c, 1);
-}
-
-void	ft_putstr(const char *s)
-{
-	write(1, s, ft_strlen(s));
+	write(1, s, count);
 }
 
 size_t	ft_intlen(int n)
@@ -44,6 +41,32 @@ size_t	ft_intlen(int n)
 	while (num >= 10)
 	{
 		num = num / 10;
+		len++;
+	}
+	return (len);
+}
+
+size_t	ft_uintlen(unsigned int n)
+{
+	size_t		len;
+
+	len = 1;
+	while (n >= 10)
+	{
+		n = n / 10;
+		len++;
+	}
+	return (len);
+}
+
+size_t	ft_hexlen(long unsigned n)
+{
+	size_t		len;
+
+	len = 1;
+	while (n >= 16)
+	{
+		n = n / 16;
 		len++;
 	}
 	return (len);

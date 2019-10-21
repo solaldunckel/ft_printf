@@ -6,44 +6,38 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 11:10:11 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/19 17:17:16 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/21 02:30:54 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putstr_l(const char *s, int len)
-{
-	write(1, s, len);
-}
-
 void	ft_str_it(va_list ap, t_printf *tab, const char *str)
 {
 	char	*s;
-	int		j;
-	int		pos;
+	int		i;
 
-	j = 0;
-	pos = 0;
-	while (str[tab->i])
+	s = malloc(sizeof(char) * BUFFER_SIZE);
+	i = 0;
+	while (str[tab->i] != '\0')
 	{
-		if (str[tab->i] == '%' && tab->i++)
+		if (str[tab->i] == '%')
 		{
-			if (j != 0)
-				ft_putstr_l(&str[pos], j);
+			if (str[tab->i] == '%' && str[tab->i + 1] == '\0')
+				break ;
+			(i != 0) ? tab->s = ft_strjoin(tab->s, s) : 0;
+			(i != 0) ? i = 0 : 0;
 			ft_parse(str, ap, tab);
-			j = 0;
 		}
 		else
 		{
-			if (j == 0)
-				pos = tab->i;
-			tab->count += 1;
-			j++;
+			s[i++] = str[tab->i];
+			s[i] = '\0';
 		}
 		tab->i++;
 	}
-	j ? ft_putstr_l(&str[pos], j) : 0;
+	(i != 0) ? tab->s = ft_strjoin(tab->s, s) : 0;
+	free(s);
 }
 
 int		ft_printf(const char *str, ...)
@@ -54,12 +48,21 @@ int		ft_printf(const char *str, ...)
 
 	if (!(tab = malloc(sizeof(t_printf))))
 		return (0);
-	tab->count = 0;
+	if (!(tab->s = malloc(sizeof(char*))))
+		return (0);
+	if (!(tab->tmp = malloc(sizeof(char*))))
+		return (0);
+	if (!(tab->num = malloc(sizeof(char*))))
+		return (0);
 	tab->i = 0;
 	va_start(ap, str);
 	ft_str_it(ap, tab, str);
 	va_end(ap);
-	count = tab->count;
+	count = ft_strlen(tab->s) + tab->offset;
+	ft_putstr_len(tab->s, count);
+	free(tab->num);
+	free(tab->tmp);
+	free(tab->s);
 	free(tab);
 	return (count);
 }

@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 09:51:05 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/19 19:07:44 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/21 02:25:43 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,61 @@ int		ft_atoi(const char *str, int *i)
 	return (atoi);
 }
 
-size_t	ft_uintlen(unsigned int n)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t		len;
+	char	*str;
+	int		i;
+	int		j;
 
-	len = 1;
-	while (n >= 10)
+	i = 0;
+	j = 0;
+	if (!(str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1))))
+		return (NULL);
+	while (s1[i] != '\0')
 	{
-		n = n / 10;
-		len++;
+		str[i] = s1[i];
+		i++;
 	}
-	return (len);
+	while (s2[j] != '\0')
+	{
+		str[i + j] = s2[j];
+		j++;
+	}
+	str[i + j] = '\0';
+	return (str);
 }
 
-size_t	ft_hexlen(long unsigned n)
+char	*ft_strjoin_len(char const *s1, char const *s2, int len)
 {
-	size_t		len;
+	char	*str;
+	int		i;
+	int		j;
 
-	len = 1;
-	while (n >= 16)
+	i = 0;
+	j = 0;
+	if (!(str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1))))
+		return (NULL);
+	while (s1[i])
 	{
-		n = n / 16;
-		len++;
+		str[i] = s1[i];
+		i++;
 	}
-	return (len);
+	while (s2[j] && j < len)
+	{
+		str[i + j] = s2[j];
+		j++;
+	}
+	str[i + j] = '\0';
+	return (str);
+}
+
+char	*ft_join_char(char c, char *str)
+{
+	char	*s;
+
+	s = malloc(sizeof(char) * 2);
+	s[0] = c;
+	s[1] = '\0';
+	str = ft_strjoin(str, s);
+	return (str);
 }

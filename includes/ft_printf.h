@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 09:29:00 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/19 19:06:34 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/21 00:44:09 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,23 @@
 # include <stdarg.h>
 # include <string.h>
 
+# define BUFFER_SIZE 256
+
 typedef struct	s_printf
 {
-	int width;
-	int	precision;
-	int	precision_width;
-	int	precision_parsing;
-	int minus;
-	int zero;
-	int count;
-	int i;
+	char	*s;
+	char	*tmp;
+	char	*num;
+	int		width;
+	int		precision;
+	int		precision_width;
+	int		precision_parsing;
+	int		minus;
+	int		zero;
+	int		offset;
+	int		plus;
+	int		space;
+	int		i;
 }				t_printf;
 
 /*
@@ -35,43 +42,46 @@ typedef struct	s_printf
 */
 
 int				ft_printf(const char *str, ...);
-int				ft_parse(const char *str, va_list ap, t_printf *tab);
-void			ft_check_flag(const char *str, va_list ap, t_printf *tab);
 void			ft_str_it(va_list ap, t_printf *tab, const char *str);
+void			ft_parse(const char *str, va_list ap, t_printf *tab);
+void			ft_check_flag(const char *str, va_list ap, t_printf *tab);
 
 /*
 ** libft
 */
 
-void			ft_putchar(char c);
-void			ft_putstr(const char *s);
-void			ft_putnbr(int n);
+void			ft_putstr_len(const char *s, int count);
+char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strjoin_len(char const *s1, char const *s2, int len);
 int				ft_atoi(const char *str, int *i);
 int				ft_strlen(const char *s);
 size_t			ft_intlen(int n);
 size_t			ft_uintlen(unsigned int n);
+size_t			ft_hexlen(long unsigned n);
+
+char			*ft_join_char(char c, char *str);
+char	*ft_strdup(const char *s1);
+
+void			ft_print_char(char c, t_printf *tab);
+void			ft_print_str(const char *s, t_printf *tab);
+void			ft_print_nbr(int n, t_printf *tab);
+void			ft_print_nbr_u(unsigned int n, t_printf *tab);
+void			ft_print_add(long unsigned add, t_printf *tab);
+void			ft_print_hex(unsigned int hex, int uppercase, t_printf *tab);
+char			*ft_print_sp(int n, int zero);
 
 /*
 ** printer
 */
 
-void			ft_putnbr_u(unsigned int n);
-void			ft_put_hex(long unsigned num, char *base);
-void			ft_put_hex_p(long unsigned num, char *base, t_printf *tab);
-void			ft_putstr_p(const char *s, t_printf *tab);
-void			ft_putstr_l(const char *s, int len);
-void			ft_print_str(const char *s, t_printf *tab);
-void			ft_print_nbr(int n, t_printf *tab);
-void			ft_print_nbr_u(unsigned int n, t_printf *tab);
-void			ft_print_percent(char c, t_printf *tab);
-void			ft_print_add(long unsigned add, t_printf *tab);
-void			ft_print_hex(unsigned int hex, int base, t_printf *tab);
-void			ft_print_spaces(t_printf *tab, int res);
+char			*ft_itoa(int n);
+char			*ft_uitoa(unsigned int n);
+char			*ft_itoa_hex(long unsigned num, char *base);
+
 /*
 ** other
 */
-void			ft_update_count(t_printf *tab, int len);
-size_t			ft_hexlen(long unsigned n);
+
 void			ft_set_precision(t_printf *tab);
 void			ft_reset_flags(t_printf *tab);
 size_t			ft_is_flag(char c);

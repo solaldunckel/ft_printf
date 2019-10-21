@@ -6,7 +6,7 @@
 #    By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/07 12:02:19 by sdunckel          #+#    #+#              #
-#    Updated: 2019/10/19 18:26:02 by sdunckel         ###   ########.fr        #
+#    Updated: 2019/10/21 02:31:42 by sdunckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,14 +29,13 @@ HEADER			= includes
 FOLDER			= srcs
 
 CC				= gcc
-CFLAGS 			= #-Wall -Wextra -Werror
+CFLAGS 			= -Wall -Wextra -Werror
 RM				= rm -f
 
 all:			${NAME}
 
 $(NAME):		${OBJS}
 				@ar -rcs ${NAME} ${OBJS}
-				@${CC} ${CFLAGS} ${SRCS} main.c -I ${HEADER} -o ft_printf
 
 %.o: %.c
 				@${CC} ${CFLAGS} -c -o $@ $< -I ${HEADER}
@@ -45,7 +44,7 @@ clean:
 				@${RM} ${OBJS}
 
 fclean:			clean
-				@${RM} ${NAME} ft_printf
+				@${RM} ${NAME}
 
 re:				fclean all
 
