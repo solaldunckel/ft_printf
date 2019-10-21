@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 21:36:00 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/21 02:30:05 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/21 16:32:35 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ int		ft_strlen(const char *s)
 void	ft_putstr_len(const char *s, int count)
 {
 	write(1, s, count);
+}
+
+void	ft_putstr(const char *s)
+{
+	write(1, s, ft_strlen(s));
 }
 
 size_t	ft_intlen(int n)

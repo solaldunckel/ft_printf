@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 09:29:00 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/21 00:44:09 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/21 17:17:05 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,17 @@ void			ft_check_flag(const char *str, va_list ap, t_printf *tab);
 */
 
 void			ft_putstr_len(const char *s, int count);
-char			*ft_strjoin(char const *s1, char const *s2);
-char			*ft_strjoin_len(char const *s1, char const *s2, int len);
+char			*ft_strjoin(char *s1, char *s2);
+char			*ft_strjoin_len(char *s1, char *s2, int len);
 int				ft_atoi(const char *str, int *i);
 int				ft_strlen(const char *s);
 size_t			ft_intlen(int n);
 size_t			ft_uintlen(unsigned int n);
 size_t			ft_hexlen(long unsigned n);
-
+void			ft_strdel(const char **as);
+void	ft_putstr(const char *s);
 char			*ft_join_char(char c, char *str);
-char	*ft_strdup(const char *s1);
+char			*ft_strdup(const char *s1);
 
 void			ft_print_char(char c, t_printf *tab);
 void			ft_print_str(const char *s, t_printf *tab);

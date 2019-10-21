@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 09:51:05 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/21 02:25:43 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/21 17:16:54 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		ft_atoi(const char *str, int *i)
 	return (atoi);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
 	int		i;
@@ -47,10 +47,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		j++;
 	}
 	str[i + j] = '\0';
+	free(s1);
 	return (str);
 }
 
-char	*ft_strjoin_len(char const *s1, char const *s2, int len)
+char	*ft_strjoin_len(char *s1, char *s2, int len)
 {
 	char	*str;
 	int		i;
@@ -71,6 +72,8 @@ char	*ft_strjoin_len(char const *s1, char const *s2, int len)
 		j++;
 	}
 	str[i + j] = '\0';
+	free(s1);
+	free(s2);
 	return (str);
 }
 

@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 11:10:11 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/21 02:30:54 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/21 17:16:10 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	ft_str_it(va_list ap, t_printf *tab, const char *str)
 		tab->i++;
 	}
 	(i != 0) ? tab->s = ft_strjoin(tab->s, s) : 0;
-	free(s);
 }
 
 int		ft_printf(const char *str, ...)
@@ -60,8 +59,6 @@ int		ft_printf(const char *str, ...)
 	va_end(ap);
 	count = ft_strlen(tab->s) + tab->offset;
 	ft_putstr_len(tab->s, count);
-	free(tab->num);
-	free(tab->tmp);
 	free(tab->s);
 	free(tab);
 	return (count);

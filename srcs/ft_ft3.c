@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 18:23:50 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/21 01:20:25 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/21 16:21:51 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	ft_reset_flags(t_printf *tab)
 		tab->num[i] = '\0';
 		i++;
 	}
-	if (!(tab->tmp = malloc(sizeof(char*))))
-		return ;
 	tab->width = 0;
 	tab->precision = 0;
 	tab->precision_width = 0;

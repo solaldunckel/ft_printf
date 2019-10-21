@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:00:09 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/21 02:31:17 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/21 16:44:19 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ int		ft_parse2(const char *str, va_list ap, t_printf *tab)
 		if (!ft_is_from_pf(str[tab->i + 1]))
 		{
 			tab->minus ? tab->tmp = ft_join_char(str[tab->i + 1], tab->tmp) : 0;
-			tab->tmp = ft_strjoin(tab->tmp, ft_print_sp(tab->width - 1, tab->zero));
-			!tab->minus ? tab->tmp = ft_join_char(str[tab->i + 1], tab->tmp) : 0;
+			tab->tmp = ft_strjoin(tab->tmp, ft_print_sp(tab->width - 1,
+				tab->zero));
+			!tab->minus ? tab->tmp = ft_join_char(str[tab->i + 1],
+				tab->tmp) : 0;
 			tab->s = ft_strjoin(tab->s, tab->tmp);
 			tab->i++;
 			return (0);

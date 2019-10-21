@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 14:14:34 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/21 02:31:54 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/21 17:04:27 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ void 	test(char *test, char *str, int nb)
 		ret[1] = ft_printf(test, str);
 	}
 	else if (nb)
+	{
+		ret[0] = printf(   test, nb);
+		ret[1] = ft_printf(test, nb);
+	}
+	else if (nb == 0)
 	{
 		ret[0] = printf(   test, nb);
 		ret[1] = ft_printf(test, nb);
@@ -117,6 +122,7 @@ int		main(void)
 	// }
 	//	ft_printf("why it doesn't work %.2s for god sake %.5s\n", str, str);
 
+	//printf(" => %.10 25p");
 	printf("\033[2J\n");
 	ft_printf("\n\033[0;33m**************************\n");
 	ft_printf("********  RANDOM  ********\n");
@@ -131,7 +137,6 @@ int		main(void)
 	test_null("si ca marche pas t'es %.4s quand meme\n");
 	test("      %", NULL, NULL);
 	test("", NULL, NULL);
-	ft_printf("ca va devenir chiant   %d putain de %d\n", nb, nb);
 	//
 	ft_printf("Appuyer sur une touche pour continuer.");
 	getchar();
@@ -208,7 +213,7 @@ int		main(void)
 	ft_printf("\n\033[0;33m**********************\n");
 	ft_printf("********  %%p  ********\n");
 	ft_printf("**********************\033[0m\n\n");
-	int 	zer = 0;
+	int 	zer = 120;
 	test("=> %%p : [%p]\n", str, NULL);
 	test("=> %%p : [%.015p]\n", str, NULL);
 	test("=> %%p : [%020p]\n", str, NULL);
@@ -220,8 +225,9 @@ int		main(void)
 	test("=> %%p : [%.25p]\n", NULL, nb);
 	test("=> %%p : [%.10 25p]\n", NULL, 0);
 	test("=> %%p : [%.10 -25p]\n", NULL, 0);
-	test("=> %%p : [%. 25p]\n", NULL, zer);
+	test("=> %%p : [%. 025p]\n", NULL, zer);
 	test("=> %%p : [%. 25p]\n", NULL, 0);
+	test("=> %%p : [%. 25p]\n", NULL, zer);
 
 	ft_printf("Appuyer sur une touche pour continuer.");
 	getchar();
