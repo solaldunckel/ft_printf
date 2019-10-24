@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 09:29:00 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/24 14:04:01 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/24 15:11:55 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdarg.h>
 # include <string.h>
 
-# define BUFFER_SIZE 70
+# define BUFFER_SIZE 128
 
 typedef struct	s_printf
 {
@@ -47,6 +47,7 @@ typedef struct	s_printf
 }				t_printf;
 
 int				ft_printf(const char *str, ...);
+void			ft_init_struct(t_printf *tab);
 void			ft_str_it(va_list ap, t_printf *tab, char *str);
 void			ft_parse(char *str, va_list ap, t_printf *tab);
 void			ft_check_flag(char *str, va_list ap, t_printf *tab);

@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 11:10:11 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/24 02:10:04 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/24 15:11:02 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,29 +52,51 @@ void	ft_print_normal(t_printf *tab, char *str)
 	tab->i--;
 }
 
+void	ft_init_struct(t_printf *tab)
+{
+	tab->buf_count = 0;
+	tab->ret = 0;
+	tab->width = 0;
+	tab->precision = 0;
+	tab->precision_width = 0;
+	tab->precision_parsing = 0;
+	tab->converter = 0;
+	tab->minus = 0;
+	tab->zero = 0;
+	tab->plus = 0;
+	tab->space = 0;
+	tab->sharp = 0;
+	tab->len = 0;
+	tab->sp_len = 0;
+	tab->is_int = 0;
+	tab->h_count = 0;
+	tab->l_count = 0;
+	tab->n = 0;
+	tab->u = 0;
+	tab->i = 0;
+}
+
 int		ft_printf(const char *str, ...)
 {
-	t_printf	*tab;
+	t_printf	tab;
 	va_list		ap;
 
-	if (!(tab = ft_calloc(1, sizeof(t_printf))))
-		return (0);
+	ft_init_struct(&tab);
 	va_start(ap, str);
-	while (str[tab->i])
+	while (str[tab.i])
 	{
-		if (str[tab->i] == '%')
+		if (str[tab.i] == '%')
 		{
-			if (str[tab->i + 1] == '\0')
+			if (str[tab.i + 1] == '\0')
 				break ;
-			if (ft_is_from_pf(str[tab->i + 1]))
-				ft_parse((char*)str, ap, tab);
+			if (ft_is_from_pf(str[tab.i + 1]))
+				ft_parse((char*)str, ap, &tab);
 		}
 		else
-			ft_print_normal(tab, (char*)str);
-		tab->i++;
+			ft_print_normal(&tab, (char*)str);
+		tab.i++;
 	}
 	va_end(ap);
-	ft_dump_buffer(tab);
-	free(tab);
-	return (tab->ret);
+	ft_dump_buffer(&tab);
+	return (tab.ret);
 }
