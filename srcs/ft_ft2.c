@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 09:51:05 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/24 14:03:17 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/24 15:18:11 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*ft_c_to_str(char c)
 	return (s);
 }
 
-size_t		intlen_printf(intmax_t n)
+size_t	intlen_printf(intmax_t n)
 {
 	size_t		len;
 
@@ -72,7 +72,7 @@ size_t		intlen_printf(intmax_t n)
 	return (len);
 }
 
-size_t		uintlen_printf(uintmax_t n)
+size_t	uintlen_printf(uintmax_t n)
 {
 	size_t		len;
 

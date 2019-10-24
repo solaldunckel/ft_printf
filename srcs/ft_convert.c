@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 10:34:24 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/24 14:38:12 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/24 15:18:28 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_convert_n(va_list ap, t_printf *tab)
 		n = (intmax_t *)va_arg(ap, long *);
 	else if (tab->h_count && ((tab->h_count % 2) == 0))
 		n = (intmax_t *)((char *)va_arg(ap, int *));
-	else if (tab->h_count &&  ((tab->h_count % 2) != 0))
+	else if (tab->h_count && ((tab->h_count % 2) != 0))
 		n = (intmax_t *)((short *)va_arg(ap, int *));
 	else
 		n = (intmax_t *)va_arg(ap, int *);

@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 15:43:05 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/24 14:37:55 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/24 15:18:52 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	ft_size_int(va_list ap, t_printf *tab)
 		tab->n = (intmax_t)va_arg(ap, long long);
 	else if (tab->l_count == 1)
 		tab->n = (intmax_t)va_arg(ap, long);
-	else if (tab->h_count &&  ((tab->h_count % 2) == 0))
+	else if (tab->h_count && ((tab->h_count % 2) == 0))
 		tab->n = (intmax_t)((char)va_arg(ap, int));
-	else if (tab->h_count &&  ((tab->h_count % 2) != 0))
+	else if (tab->h_count && ((tab->h_count % 2) != 0))
 		tab->n = (intmax_t)((short)va_arg(ap, int));
 	else
 		tab->n = (intmax_t)va_arg(ap, int);

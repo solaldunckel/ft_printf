@@ -6,13 +6,13 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 18:23:50 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/24 14:03:26 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/24 15:18:43 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t		intlen_base_pf(uintmax_t n, char *base)
+size_t	intlen_base_pf(uintmax_t n, char *base)
 {
 	size_t		len;
 	long		base_len;
