@@ -6,7 +6,7 @@
 #    By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/07 12:02:19 by sdunckel          #+#    #+#              #
-#    Updated: 2019/10/24 14:38:36 by sdunckel         ###   ########.fr        #
+#    Updated: 2019/10/24 15:25:06 by sdunckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRCS_LIST		= \
 					ft_ft.c \
 					ft_ft2.c \
 					ft_ft3.c
-				
+
 SRCS			= $(addprefix ${FOLDER}/, ${SRCS_LIST})
 
 OBJS			= ${SRCS:.c=.o}
@@ -41,6 +41,8 @@ $(NAME):		${OBJS}
 				@make -C $(LIBFT)
 				@cp libft/libft.a ./$(NAME)
 				@ar -rcs ${NAME} ${OBJS}
+
+bonus:			${NAME}
 
 %.o: %.c
 				@${CC} ${CFLAGS} -I ${HEADER} -o $@ -c $<
