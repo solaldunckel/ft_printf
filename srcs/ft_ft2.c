@@ -6,13 +6,13 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 09:51:05 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/21 17:16:54 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/24 14:03:17 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_atoi(const char *str, int *i)
+int		ft_atoi_printf(char *str, int *i)
 {
 	int		atoi;
 
@@ -26,64 +26,61 @@ int		ft_atoi(const char *str, int *i)
 	return (atoi);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strdup_l(char *s, t_printf *tab)
 {
 	char	*str;
 	int		i;
-	int		j;
+	int		len;
 
 	i = 0;
-	j = 0;
-	if (!(str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1))))
+	len = ft_strlen(s);
+	if (tab->precision && tab->precision_width < len)
+		len = tab->precision_width;
+	if (!(str = ft_calloc(len + 1, sizeof(char))))
 		return (NULL);
-	while (s1[i] != '\0')
+	while (i < len)
 	{
-		str[i] = s1[i];
+		str[i] = s[i];
 		i++;
 	}
-	while (s2[j] != '\0')
-	{
-		str[i + j] = s2[j];
-		j++;
-	}
-	str[i + j] = '\0';
-	free(s1);
+	str[i] = '\0';
 	return (str);
 }
 
-char	*ft_strjoin_len(char *s1, char *s2, int len)
-{
-	char	*str;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	if (!(str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1))))
-		return (NULL);
-	while (s1[i])
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	while (s2[j] && j < len)
-	{
-		str[i + j] = s2[j];
-		j++;
-	}
-	str[i + j] = '\0';
-	free(s1);
-	free(s2);
-	return (str);
-}
-
-char	*ft_join_char(char c, char *str)
+char	*ft_c_to_str(char c)
 {
 	char	*s;
 
-	s = malloc(sizeof(char) * 2);
+	s = ft_calloc(2, sizeof(char));
 	s[0] = c;
 	s[1] = '\0';
-	str = ft_strjoin(str, s);
-	return (str);
+	return (s);
+}
+
+size_t		intlen_printf(intmax_t n)
+{
+	size_t		len;
+
+	len = 0;
+	if (!n)
+		len++;
+	while (n)
+	{
+		n = n / 10;
+		len++;
+	}
+	return (len);
+}
+
+size_t		uintlen_printf(uintmax_t n)
+{
+	size_t		len;
+
+	len = 1;
+	while (n >= 10)
+	{
+		n = n / 10;
+		len++;
+	}
+	return (len);
 }

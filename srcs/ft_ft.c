@@ -5,81 +5,124 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/10 12:27:19 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/21 00:44:01 by sdunckel         ###   ########.fr       */
+/*   Created: 2019/10/23 15:45:21 by sdunckel          #+#    #+#             */
+/*   Updated: 2019/10/24 13:37:20 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_itoa(int n)
+void	ft_add_sign(t_printf *tab)
 {
-	char	*str;
-	long	num;
-	int		num_len;
-
-	num = n;
-	num_len = ft_intlen(num);
-	if (num < 0)
-		num = -num;
-	if (!(str = (char*)malloc(sizeof(char) * num_len + 1)))
-		return (NULL);
-	str[num_len] = '\0';
-	while (num_len)
+	if (tab->n < 0)
 	{
-		str[--num_len] = num % 10 + 48;
-		num = num / 10;
+		tab->len--;
+		ft_add_to_buff(tab, "-", 1);
 	}
-	return (str);
+	else if (tab->plus && (tab->n >= 0))
+	{
+		tab->len--;
+		ft_add_to_buff(tab, "+", 1);
+	}
+	else if (tab->space && !tab->plus && (tab->n >= 0))
+	{
+		tab->len--;
+		ft_add_to_buff(tab, " ", 1);
+	}
 }
 
-char	*ft_uitoa(unsigned int n)
+void	ft_add_prefix(t_printf *tab)
 {
-	char	*str;
-	int		num_len;
-
-	num_len = ft_uintlen(n);
-	if (!(str = (char*)malloc(sizeof(char) * num_len + 1)))
-		return (NULL);
-	str[num_len] = '\0';
-	while (num_len)
+	if (tab->converter == 'x')
 	{
-		str[--num_len] = n % 10 + 48;
-		n = n / 10;
+		ft_add_to_buff(tab, "0x", 2);
+		tab->len -= 2;
 	}
-	return (str);
+	if (tab->converter == 'X')
+	{
+		ft_add_to_buff(tab, "0X", 2);
+		tab->len -= 2;
+	}
 }
 
-char	*ft_itoa_hex(long unsigned num, char *base)
+void	ft_join_all(char *str, char *sp, t_printf *tab)
 {
-	char	*str;
-	int		num_len;
-
-	num_len = ft_hexlen(num);
-	if (!(str = (char*)malloc(sizeof(char) * num_len + 1)))
-		return (NULL);
-	str[num_len] = '\0';
-	while (num_len)
+	(tab->is_int == 1 && tab->zero) ? ft_add_sign(tab) : 0;
+	if (tab->zero && tab->converter == 'p')
 	{
-		str[--num_len] = base[num % 16];
-		num = num / 16;
+		ft_add_to_buff(tab, "0x", 2);
+		tab->len -= 2;
 	}
-	return (str);
+	if (tab->sharp && tab->u && tab->zero && tab->precision_width < tab->len)
+		ft_add_prefix(tab);
+	if (sp && !tab->minus)
+		ft_add_to_buff(tab, sp, tab->sp_len);
+	if (!tab->zero && tab->converter == 'p')
+	{
+		ft_add_to_buff(tab, "0x", 2);
+		tab->len -= 2;
+	}
+	if (tab->sharp && tab->u && !tab->zero && tab->precision_width < tab->len)
+		ft_add_prefix(tab);
+	if (tab->is_int == 1 && !tab->zero)
+		ft_add_sign(tab);
+	ft_add_to_buff(tab, str, tab->len);
+	if (sp && tab->minus)
+		ft_add_to_buff(tab, sp, tab->sp_len);
+	free(str);
+	free(sp);
 }
 
-char	*ft_strdup(const char *s1)
+char	*ft_print_sp(t_printf *tab)
 {
 	char	*str;
 	int		i;
 
 	i = 0;
-	if (!(str = (char*)malloc(sizeof(char) * ft_strlen(s1) + 1)))
+	if (tab->width < tab->len)
 		return (NULL);
-	while (s1[i])
+	if (!(str = ft_calloc((tab->width - tab->len + 1), sizeof(char))))
+		return (NULL);
+	if (tab->precision && tab->precision_width > tab->len)
+		tab->zero = 0;
+	while (i < tab->width - tab->len)
 	{
-		str[i] = (char)s1[i];
+		if (tab->zero)
+			str[i] = '0';
+		else
+			str[i] = ' ';
 		i++;
 	}
+	tab->sp_len = i;
 	str[i] = '\0';
 	return (str);
+}
+
+char	*ft_num_precision(char *str, t_printf *tab)
+{
+	char	*tmp;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	if (!tab->precision)
+		return (str);
+	if (tab->precision_width < tab->len)
+		return (str);
+	if (!(tmp = ft_calloc(tab->precision_width + tab->len + 1, sizeof(char))))
+		return (NULL);
+	while (i < tab->precision_width - tab->len)
+	{
+		tmp[i] = '0';
+		i++;
+	}
+	while (str[j])
+	{
+		tmp[i + j] = str[j];
+		j++;
+	}
+	tmp[i + j] = '\0';
+	free(str);
+	return (tmp);
 }
