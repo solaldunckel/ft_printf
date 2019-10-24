@@ -6,11 +6,38 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 09:51:05 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/24 15:18:11 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/24 22:43:40 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+char	*itoa_printf(intmax_t n)
+{
+	char		*str;
+	int			num_len;
+
+	num_len = ft_intlen(n);
+	if (!(str = ft_calloc((num_len + 1), sizeof(char))))
+		return (NULL);
+	str[num_len] = '\0';
+	while (num_len)
+	{
+		if (n < 0)
+		{
+			str[--num_len] = -(n % 10) + 48;
+			n = n / 10;
+			n = -n;
+		}
+		else
+		{
+			str[--num_len] = n % 10 + 48;
+			n = n / 10;
+		}
+	}
+	return (str);
+}
+
 
 int		ft_atoi_printf(char *str, int *i)
 {
@@ -47,40 +74,30 @@ char	*ft_strdup_l(char *s, t_printf *tab)
 	return (str);
 }
 
-char	*ft_c_to_str(char c)
+void	ft_set_precision(t_printf *tab)
 {
-	char	*s;
-
-	s = ft_calloc(2, sizeof(char));
-	s[0] = c;
-	s[1] = '\0';
-	return (s);
+	tab->precision = 1;
+	tab->precision_parsing = 1;
+	tab->precision_width = 0;
 }
 
-size_t	intlen_printf(intmax_t n)
+void	ft_reset_flags(t_printf *tab)
 {
-	size_t		len;
-
-	len = 0;
-	if (!n)
-		len++;
-	while (n)
-	{
-		n = n / 10;
-		len++;
-	}
-	return (len);
-}
-
-size_t	uintlen_printf(uintmax_t n)
-{
-	size_t		len;
-
-	len = 1;
-	while (n >= 10)
-	{
-		n = n / 10;
-		len++;
-	}
-	return (len);
+	tab->width = 0;
+	tab->precision = 0;
+	tab->precision_width = 0;
+	tab->precision_parsing = 0;
+	tab->converter = 0;
+	tab->minus = 0;
+	tab->zero = 0;
+	tab->plus = 0;
+	tab->space = 0;
+	tab->sharp = 0;
+	tab->len = 0;
+	tab->sp_len = 0;
+	tab->is_int = 0;
+	tab->h_count = 0;
+	tab->l_count = 0;
+	tab->n = 0;
+	tab->u = 0;
 }

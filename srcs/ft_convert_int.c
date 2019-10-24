@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 15:43:05 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/24 15:18:52 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/24 22:51:14 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_convert_int(va_list ap, t_printf *tab)
 	tab->is_int = 1;
 	ft_size_int(ap, tab);
 	str = itoa_printf(tab->n);
-	tab->len = intlen_printf(tab->n);
+	tab->len = ft_intlen(tab->n);
 	str = ft_num_precision(str, tab);
 	tab->len = ft_strlen(str);
 	(tab->n < 0) ? tab->len++ : 0;
@@ -74,7 +74,7 @@ void	ft_convert_uint(va_list ap, t_printf *tab)
 	char	*sp;
 
 	ft_size_u(ap, tab);
-	str = uitoa_printf(tab->u);
+	str = ft_uitoa(tab->u);
 	tab->len = ft_strlen(str);
 	str = ft_num_precision(str, tab);
 	tab->len = ft_strlen(str);

@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert_base.c                                  :+:      :+:    :+:   */
+/*   ft_uintlen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 14:59:20 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/24 22:10:13 by sdunckel         ###   ########.fr       */
+/*   Created: 2019/10/24 22:39:45 by sdunckel          #+#    #+#             */
+/*   Updated: 2019/10/24 22:39:58 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
+size_t	ft_uintlen(uintmax_t n)
 {
-	intmax_t	num;
-	int			i;
-	char		*tab;
+	size_t		len;
 
-	i = 0;
-	if (!ft_check_base(base_from) || !ft_check_base(base_to))
-		return (NULL);
-	num = ft_atoi_base(nbr, base_from);
-	tab = ft_itoa_base(num, base_to);
-	return (tab);
+	len = 1;
+	while (n >= 10)
+	{
+		n = n / 10;
+		len++;
+	}
+	return (len);
 }

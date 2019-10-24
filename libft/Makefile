@@ -6,7 +6,7 @@
 #    By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/07 12:02:19 by sdunckel          #+#    #+#              #
-#    Updated: 2019/10/11 14:03:09 by sdunckel         ###   ########.fr        #
+#    Updated: 2019/10/24 22:46:47 by sdunckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,11 @@ SRCS_LIST	= \
 				ft_strtrim.c \
 				ft_substr.c \
 				ft_tolower.c \
-				ft_toupper.c
+				ft_c_to_str.c \
+				ft_toupper.c \
+				ft_uitoa.c \
+				ft_uintlen.c \
+				get_next_line.c
 SRCS		= $(addprefix ${FOLDER}/, ${SRCS_LIST})
 OBJS		= ${SRCS:.c=.o}
 HEADER		= includes

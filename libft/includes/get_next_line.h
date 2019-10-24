@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert_base.c                                  :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 14:59:20 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/24 22:10:13 by sdunckel         ###   ########.fr       */
+/*   Created: 2019/10/11 11:17:21 by sdunckel          #+#    #+#             */
+/*   Updated: 2019/10/24 22:24:29 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
-{
-	intmax_t	num;
-	int			i;
-	char		*tab;
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 32
+# endif
 
-	i = 0;
-	if (!ft_check_base(base_from) || !ft_check_base(base_to))
-		return (NULL);
-	num = ft_atoi_base(nbr, base_from);
-	tab = ft_itoa_base(num, base_to);
-	return (tab);
-}
+# define SUCCESS 1
+# define FINISH 0
+# define ERROR -1
+
+# include "libft.h"
+
+int		get_next_line(int fd, char **line);
+
+#endif

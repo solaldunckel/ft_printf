@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert_base.c                                  :+:      :+:    :+:   */
+/*   ft_uitoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 14:59:20 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/24 22:10:13 by sdunckel         ###   ########.fr       */
+/*   Created: 2019/10/24 22:38:45 by sdunckel          #+#    #+#             */
+/*   Updated: 2019/10/24 22:39:01 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
+char	*ft_uitoa(uintmax_t n)
 {
-	intmax_t	num;
-	int			i;
-	char		*tab;
+	char		*str;
+	int			num_len;
 
-	i = 0;
-	if (!ft_check_base(base_from) || !ft_check_base(base_to))
+	num_len = ft_uintlen(n);
+	if (!(str = ft_calloc((num_len + 1), sizeof(char))))
 		return (NULL);
-	num = ft_atoi_base(nbr, base_from);
-	tab = ft_itoa_base(num, base_to);
-	return (tab);
+	str[num_len] = '\0';
+	while (num_len)
+	{
+		str[--num_len] = n % 10 + 48;
+		n = n / 10;
+	}
+	return (str);
 }

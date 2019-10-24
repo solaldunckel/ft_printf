@@ -6,7 +6,7 @@
 #    By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/07 12:02:19 by sdunckel          #+#    #+#              #
-#    Updated: 2019/10/24 15:25:06 by sdunckel         ###   ########.fr        #
+#    Updated: 2019/10/24 22:43:52 by sdunckel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,8 @@ SRCS_LIST		= \
 					ft_parse.c \
 					ft_convert.c \
 					ft_convert_int.c \
-					ft_itoa.c \
 					ft_ft.c \
-					ft_ft2.c \
-					ft_ft3.c
+					ft_ft2.c 
 
 SRCS			= $(addprefix ${FOLDER}/, ${SRCS_LIST})
 

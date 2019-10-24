@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 10:34:24 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/24 15:18:28 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/24 22:37:26 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void	ft_convert_x(va_list ap, t_printf *tab)
 
 	str = NULL;
 	ft_size_u(ap, tab);
-	tab->converter == 'x' ? str = itoa_base_pf(tab->u, "0123456789abcdef") : 0;
-	tab->converter == 'X' ? str = itoa_base_pf(tab->u, "0123456789ABCDEF") : 0;
+	tab->converter == 'x' ? str = ft_itoa_base(tab->u, "0123456789abcdef") : 0;
+	tab->converter == 'X' ? str = ft_itoa_base(tab->u, "0123456789ABCDEF") : 0;
 	tab->len = ft_strlen(str);
 	str = ft_num_precision(str, tab);
 	tab->len = ft_strlen(str);
@@ -95,7 +95,7 @@ void	ft_convert_p(va_list ap, t_printf *tab)
 	char	*sp;
 
 	tab->u = va_arg(ap, long unsigned);
-	str = itoa_base_pf(tab->u, "0123456789abcdef");
+	str = ft_itoa_base(tab->u, "0123456789abcdef");
 	tab->precision ? tab->zero = 0 : 0;
 	tab->len = ft_strlen(str);
 	str = ft_num_precision(str, tab);

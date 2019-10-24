@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:00:09 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/24 14:08:53 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/10/24 22:43:29 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,17 @@ void	ft_parse(char *str, va_list ap, t_printf *tab)
 	str[tab->i] == 'X' ? ft_convert_x(ap, tab) : 0;
 	str[tab->i] == '%' ? ft_convert_c(ap, tab) : 0;
 	str[tab->i] == 'n' ? ft_convert_n(ap, tab) : 0;
+}
+
+size_t	ft_is_flag(char c)
+{
+	return (c == 'c' || c == 's' || c == 'p' || c == 'd' || c == 'i'
+	|| c == 'u' || c == 'x' || c == 'n' || c == 'X' || c == '%');
+}
+
+size_t	ft_is_from_pf(char c)
+{
+	return (ft_is_flag(c) || (c >= '0' && c <= '9')
+	|| c == '-' || c == ' ' || c == '.' || c == '+' || c == '#' || c == '*'
+	|| c == 'l' || c == 'h');
 }
