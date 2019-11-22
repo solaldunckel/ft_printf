@@ -6,7 +6,7 @@
 /*   By: sdunckel <sdunckel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 22:14:46 by sdunckel          #+#    #+#             */
-/*   Updated: 2019/10/24 22:24:58 by sdunckel         ###   ########.fr       */
+/*   Updated: 2019/11/22 17:31:22 by sdunckel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static int		handle_line(char *s[], char **line, int fd)
 {
 	*line = ft_substr(s[fd], 0, ft_strlen_gnl(s[fd]));
 	if (ft_is_in_stri('\n', s[fd]) >= 0)
-		s[fd] = ft_substr(s[fd], ft_is_in_stri('\n', s[fd]) + 1, ft_strlen(s[fd]));
+		s[fd] = ft_substr(s[fd], ft_is_in_stri('\n', s[fd]) + 1,
+		ft_strlen(s[fd]));
 	else if (ft_strlen_gnl(s[fd]) > 0)
 		s[fd] = ft_substr(s[fd], 0, ft_strlen(s[fd]));
 	else
